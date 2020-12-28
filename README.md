@@ -1,2 +1,2 @@
-# fourier-transforms
-Uses Fourier transforms to reduce noise in raw data
+# Fourier Transforms
+C code implements Fourier transforms to reduce noise in raw data.
