@@ -47,7 +47,7 @@ void sample(complex (*p_func)(double), complex *p_array, int funcNumber, int N)
   FILE *fp; // file pointer
 
   // create text file h.txt and open for writing
-  fp = fopen("h.txt", "w");
+  fp = fopen("./DataFiles/h.txt", "w");
 
   /* sample h(t) function N times from k = 0 to k = N - 1
    * N is number of sample values
@@ -72,13 +72,13 @@ void sample(complex (*p_func)(double), complex *p_array, int funcNumber, int N)
   // if h(t) is h1(t), rename file to h1.txt
   if(funcNumber == 1)
   {
-    rename("h.txt", "h1.txt");
+    rename("./DataFiles/h.txt", "./DataFiles/h1.txt");
   }
 
   // if h(t) is h2(t), rename file to h2.txt
   if(funcNumber == 2)
   {
-    rename("h.txt", "h2.txt");
+    rename("./DataFiles/h.txt", "./DataFiles/h2.txt");
   }
 }
 
@@ -90,7 +90,7 @@ void load_h3(complex *p_array)
   int k_[N];  // define 2 local arrays for k and t_k to read in data from file
   double t_k_[N];
 
-  fp = fopen("h3.txt", "r");  //open h3.txt for reading
+  fp = fopen("./DataFiles/h3.txt", "r");  //open h3.txt for reading
   // loop through all lines of the file
   for(int j = 0; j < N; j++)
   {
@@ -140,7 +140,7 @@ void idft(complex(*p_exp)(int, int, int), complex *p_array, int funcNumber, int 
   complex max_H[200] = {0};  // local array to save 4 values of H_3 with largest amplitude for use in IDFT
   FILE *fp;
 
-  fp = fopen("h_.txt", "w");  // create file h_.txt and open for writing
+  fp = fopen("./DataFiles/h_.txt", "w");  // create file h_.txt and open for writing
   
   if(funcNumber == 3)  // if function called is h3(t)
   {
@@ -227,17 +227,17 @@ void idft(complex(*p_exp)(int, int, int), complex *p_array, int funcNumber, int 
 
   if(funcNumber == 1)
   {
-    rename("h_.txt", "h1_.txt");  // if h'(t) is h1'(t), rename file to h1_.txt
+    rename("./DataFiles/h_.txt", "./DataFiles/h1_.txt");  // if h'(t) is h1'(t), rename file to h1_.txt
   }
 
   if(funcNumber == 2)
   {
-    rename("h_.txt", "h2_.txt");  // if h'(t) is h2'(t), rename file to h2_.txt
+    rename("./DataFiles/h_.txt", "./DataFiles/h2_.txt");  // if h'(t) is h2'(t), rename file to h2_.txt
   }
 
   if(funcNumber == 3)
   {
-    rename("h_.txt", "h3_.txt");  // if h'(t) is h3'(t), rename file to h3_.txt
+    rename("./DataFiles/h_.txt", "./DataFiles/h3_.txt");  // if h'(t) is h3'(t), rename file to h3_.txt
   }
 }
 
@@ -246,14 +246,14 @@ int main()
   int N = 100;  // number of samples
 
   // complex function pointers to h1(t), h2(t) and exponential function
-  complex (*p_h1)(double);
-  complex (*p_h2)(double);
-  complex (*p_e)(int, int, int);
+  complex (*p_h1_func)(double);
+  complex (*p_h2_func)(double);
+  complex (*p_e_func)(int, int, int);
 
   // set address the pointers point to, as the address of the functions
-  p_h1 = &h1;
-  p_h2 = &h2;
-  p_e = &e;
+  p_h1_func = &h1;
+  p_h2_func = &h2;
+  p_e_func = &e;
 
   // define complex arrays for use in sampling & DFT functions
   complex h1_n[N], h2_n[N];
@@ -274,28 +274,28 @@ int main()
   p_H2 = H2_n;
 
   // sampling h1
-  sample(p_h1, p_h1, 1, N);
+  sample(p_h1_func, p_h1, 1, N);
 
   // sampling h2
-  sample(p_h2, p_h2, 2, N);
+  sample(p_h2_func, p_h2, 2, N);
 
   // discrete fourier transform of h1
   printf("For the first function:\n");
 
-  dft(p_h1, p_e, p_H1, 1, N);
+  dft(p_h1, p_e_func, p_H1, 1, N);
 
   printf("\n");
 
   // discrete fourier transform of h2
   printf("For the second function:\n");
 
-  dft(p_h2, p_e, p_H2, 2, N);
+  dft(p_h2, p_e_func, p_H2, 2, N);
 
   // inverse discrete fourier transform of H1
-  idft(p_e, p_H1, 1, 1, N);
+  idft(p_e_func, p_H1, 1, 1, N);
 
   // inverse discrete fourier transform of H2
-  idft(p_e, p_H2, 2, 0, N);
+  idft(p_e_func, p_H2, 2, 0, N);
 
   N = 200;  // set number of samples to 200
 
@@ -310,10 +310,10 @@ int main()
   load_h3(p_h3);
 
   // discrete fourier transform of h3
-  dft(p_h3, p_e, p_H3, 3, N);
+  dft(p_h3, p_e_func, p_H3, 3, N);
 
   // inverse discrete fourier transform of H3
-  idft(p_e, p_H3, 3, 0, N);
+  idft(p_e_func, p_H3, 3, 0, N);
 
   return 0;
 }
