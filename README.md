@@ -13,7 +13,7 @@ The functions `h1(t)` and `h2(t)` are given by
 
 They were first sampled at discrete time values and a DFT applied to both to produde `H1(omega)` and `H2(omega)`. The function `h1(t)` features a sinudoidal wave envelope containing another sinusoidal shape; applying the IDFT but skipping the low frequency term removes the sinusoidal pattern of the wave envelope. When applying the IDFT to `h2(t)`, the largest amplitude term was skipped, translated the function in the negative y direction.
 
-<img src="/Figures/h1.png" alt="h1" width="410"> <img src="/Figures/h2.png" alt="h2" width="440">
+<img src="/Figures/h1.png" alt="h1" width="400"> <img src="/Figures/h2.png" alt="h2" width="420">
 
 The data obtained for `h3(t)` displays a high level of noise in both the real and imaginary parts. The IDFT was applied only to the four largest amplitude terms which occurred at low frequency, hencing skipping the high frequency terms. This had the effect of reducing noise in the raw data to produce a smoother curve.
 
