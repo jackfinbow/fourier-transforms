@@ -4,6 +4,8 @@ Code written in C that performs discrete Fourier transforms (DFTs) and inverse d
 ## Introduction
 This was a second-year project as part of my MPhys Physics degree. It involved writing code in C to be able to handle complex functions, and perform DFTs and IDFTs to these functions. Two of these functions were defined in the code and sampled at discrete time intervals and a third was obtained from a provided text file via raw data values. Python was used for plotting graphs of the data and comparing the results.
 
+The use of existing libraries for handling complex numbers was forbidden so structs with real and imaginary variables are defined, to achieve this. Pointers are also used extensively in the code in order to handle passing arrays to functions, and files.
+
 ## Mathematical Background
 The functions `h1(t)` and `h2(t)` are given by
 
